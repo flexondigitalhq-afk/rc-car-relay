@@ -1,0 +1,13 @@
+{
+  "name": "rccar-cloud-relay",
+  "version": "1.0.0",
+  "description": "Cloud WebSocket Relay for ESP32 RC Car",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.22.3",
+    "ws": "^8.21.3"
+  }
+}

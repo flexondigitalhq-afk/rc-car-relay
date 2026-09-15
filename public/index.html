@@ -294,6 +294,7 @@
           <div class="kb-key" id="kSP" style="min-width:130px;">SPACE — Lights</div>
         </div>
         <div class="kb-hint">🎮 L = Police · B = Strobe · N = Lights Off</div>
+        <button id="mouse-lock-btn" class="btn btn-teal" style="margin-top:10px; width:100%;" onclick="toggleMouseLock()">🖱️ Enable Mouse Control</button>
       </div>
     </div>
 
@@ -412,6 +413,56 @@
     zone.addEventListener('touchstart', handleStart, {passive: false});
     document.addEventListener('touchend', handleEnd, {passive: false});
     document.addEventListener('touchmove', handleMove, {passive: false});
+
+    // ---- Pointer Lock / Mouse Control ----
+    let mouseLocked = false;
+    let mlX = 0, mlY = 0; // accumulated offset from center
+    const ML_MAX = maxDiff;
+    const mlBtn = document.getElementById('mouse-lock-btn');
+
+    function toggleMouseLock() {
+      if (!mouseLocked) {
+        if (!confirm('Enable Mouse Control?\n\nYour cursor will be hidden and locked. Move your mouse to steer — the joystick stays where you leave it.\n\nPress ESC to exit mouse control.')) return;
+        zone.requestPointerLock();
+      } else {
+        document.exitPointerLock();
+      }
+    }
+
+    document.addEventListener('pointerlockchange', () => {
+      mouseLocked = document.pointerLockElement === zone;
+      if (mouseLocked) {
+        mlX = 0; mlY = 0;
+        mlBtn.textContent = '🖱️ Exit Mouse Control';
+        mlBtn.classList.add('active-mode');
+        mlBtn.classList.remove('btn-teal');
+      } else {
+        // release: snap joystick back, stop car
+        mlX = 0; mlY = 0;
+        stick.style.transition = 'transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275)';
+        stick.style.transform = 'translate(0px,0px)';
+        sendDrive(0, 0);
+        mlBtn.textContent = '🖱️ Enable Mouse Control';
+        mlBtn.classList.remove('active-mode');
+        mlBtn.classList.add('btn-teal');
+      }
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (!mouseLocked) return;
+      // Accumulate movement
+      mlX += e.movementX;
+      mlY += e.movementY;
+      // Clamp to circle
+      const dist = Math.sqrt(mlX*mlX + mlY*mlY);
+      if (dist > ML_MAX) { mlX = mlX/dist*ML_MAX; mlY = mlY/dist*ML_MAX; }
+      // Update stick visual
+      stick.style.transition = 'none';
+      stick.style.transform = `translate(${mlX}px,${mlY}px)`;
+      // Send drive command based on position
+      sendDrive(mlY < -28 ? 1 : mlY > 28 ? -1 : 0, mlX > 28 ? 1 : mlX < -28 ? -1 : 0);
+    });
+
 
     // ---- Keyboard Controls ----
     const keysDown = new Set();

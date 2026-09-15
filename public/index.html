@@ -189,6 +189,32 @@
     }
 
     #active-mode-label { font-size: 14px; font-weight: 700; color: var(--accent); margin-top: 24px; text-align: center; letter-spacing: 0.5px;}
+
+    /* Keyboard HUD */
+    .kb-hud {
+      margin-top: 18px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .kb-row { display: flex; gap: 6px; justify-content: center; }
+    .kb-key {
+      min-width: 36px; height: 36px;
+      background: var(--btn-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--subtext);
+      box-shadow: 0 3px 0 var(--border);
+      transition: background 0.1s, box-shadow 0.1s, transform 0.1s;
+      user-select: none; padding: 0 8px;
+    }
+    .kb-key.active {
+      background: rgba(0,122,255,0.15);
+      color: #007aff;
+      border-color: rgba(0,122,255,0.4);
+      box-shadow: 0 1px 0 rgba(0,122,255,0.3);
+      transform: translateY(2px);
+    }
+    .kb-hint { font-size: 11px; color: var(--subtext); margin-top: 4px; text-align: center; }
     
     /* Offline overlay */
     #offline-overlay {
@@ -253,6 +279,22 @@
     <div class="center-col">
       <div id="zone_joystick"><div id="stick"></div></div>
       <div id="active-mode-label">Mode: Normal</div>
+
+      <!-- Keyboard HUD -->
+      <div class="kb-hud">
+        <div class="kb-row">
+          <div class="kb-key" id="kU">↑ W</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" id="kA">← A</div>
+          <div class="kb-key" id="kS">↓ S</div>
+          <div class="kb-key" id="kR">→ D</div>
+        </div>
+        <div class="kb-row" style="margin-top:4px;">
+          <div class="kb-key" id="kSP" style="min-width:130px;">SPACE — Lights</div>
+        </div>
+        <div class="kb-hint">🎮 L = Police · B = Strobe · N = Lights Off</div>
+      </div>
     </div>
 
     <!-- RIGHT COLUMN -->
@@ -371,12 +413,76 @@
     document.addEventListener('touchend', handleEnd, {passive: false});
     document.addEventListener('touchmove', handleMove, {passive: false});
 
+    // ---- Keyboard Controls ----
+    const keysDown = new Set();
+    let kbDrive = 0, kbSteer = 0;
+    let lightsOn = false;
+
+    const kMap = {
+      'w':'kW','arrowup':'kU',
+      's':'kS','arrowdown':'kD',
+      'a':'kA','arrowleft':'kL',
+      'd':'kR','arrowright':'kRR'
+    };
+
+    function kbUpdate() {
+      const up   = keysDown.has('w') || keysDown.has('arrowup');
+      const down = keysDown.has('s') || keysDown.has('arrowdown');
+      const left = keysDown.has('a') || keysDown.has('arrowleft');
+      const right= keysDown.has('d') || keysDown.has('arrowright');
+      const newDrive = up ? 1 : down ? -1 : 0;
+      const newSteer = right ? 1 : left ? -1 : 0;
+      if (newDrive !== kbDrive || newSteer !== kbSteer) {
+        kbDrive = newDrive; kbSteer = newSteer;
+        sendDrive(kbDrive, kbSteer);
+        // Animate joystick stick to show KB input
+        stick.style.transition = 'none';
+        stick.style.transform = `translate(${newSteer * 55}px,${newDrive * -55}px)`;
+        if (newDrive === 0 && newSteer === 0) {
+          stick.style.transition = 'transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275)';
+          stick.style.transform = 'translate(0px,0px)';
+        }
+      }
+      // Update visual key highlights
+      const ids = {w:'kW',arrowup:'kU',s:'kS',arrowdown:'kD',a:'kA',arrowleft:'kL',d:'kR',arrowright:'kRR'};
+      Object.entries(ids).forEach(([k,id]) => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', keysDown.has(k));
+      });
+      const spEl = document.getElementById('kSP');
+      if (spEl) spEl.classList.toggle('active', keysDown.has(' '));
+    }
+
+    document.addEventListener('keydown', e => {
+      const k = e.key.toLowerCase();
+      if (['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright',' '].includes(k)) {
+        e.preventDefault();
+      }
+      if (!keysDown.has(k)) {
+        keysDown.add(k);
+        if (k === ' ') {
+          lightsOn = !lightsOn;
+          setLight(lightsOn ? 'on' : 'off');
+          document.getElementById('kSP').classList.toggle('active', true);
+          setTimeout(() => document.getElementById('kSP').classList.toggle('active', false), 200);
+        }
+        if (k === 'l') { setLight('police'); }
+        if (k === 'b') { setLight('strobe'); }
+        if (k === 'n') { setLight('off'); lightsOn = false; }
+        kbUpdate();
+      }
+    });
+    document.addEventListener('keyup', e => {
+      keysDown.delete(e.key.toLowerCase());
+      kbUpdate();
+    });
+
     // ---- Helpers ----
     const sleep = ms => new Promise(r => setTimeout(r, ms));
     let comboRunning = false;
 
-    function stopAll()   { comboRunning = false; sendDrive(0,0); modeLabel.textContent = 'Mode: Stopped'; }
-    function stopCombo() { comboRunning = false; sendDrive(0,0); setLight('off'); modeLabel.textContent = 'Mode: Normal'; }
+    function stopAll()   { comboRunning = false; kbDrive = 0; kbSteer = 0; sendDrive(0,0); modeLabel.textContent = 'Mode: Stopped'; }
+    function stopCombo() { comboRunning = false; kbDrive = 0; kbSteer = 0; sendDrive(0,0); setLight('off'); modeLabel.textContent = 'Mode: Normal'; }
 
     // ============ STUNTS ============
     async function doDonut() {

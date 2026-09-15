@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
   
   <!-- Social Share / Open Graph Meta Tags -->
-  <meta property="og:title" content="RC Car Live! 🚗💨">
+  <meta property="og:title" content="RC Car Live! ðŸš—ðŸ’¨">
   <meta property="og:description" content="Take the wheel! Drive my RC car live directly from your browser.">
-  <meta property="og:image" content="https://rc-car-relay-40sd.onrender.com/banner.jpg">
-  <meta property="og:url" content="https://rc-car-relay-40sd.onrender.com">
+  <meta property="og:image" content="https://rc-car-relay-46cd.onrender.com/banner.jpg">
+  <meta property="og:url" content="https://rc-car-relay-46cd.onrender.com">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏎️</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸŽï¸</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -231,17 +231,17 @@
 <body>
   <div class="top-bar">
     <div class="header-info">
-      <h1>🌐 RC Control</h1>
+      <h1>ðŸŒ RC Control</h1>
       <div id="status-bar">
         <div id="ws-dot"></div>
         <span id="ws-label">Connecting...</span>
       </div>
     </div>
-    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">ðŸŒ™</button>
   </div>
   
   <div id="offline-overlay">
-    <h2>Car is Offline 🚗💤</h2>
+    <h2>Car is Offline ðŸš—ðŸ’¤</h2>
     <p>Waiting for the car to connect to the cloud...</p>
     <div style="margin-top:24px" id="ws-dot" class=""></div>
   </div>
@@ -250,28 +250,28 @@
     <!-- LEFT COLUMN -->
     <div class="left-col panel-container">
       <div class="panel">
-        <div class="section-title">⚡ Stunts</div>
+        <div class="section-title">âš¡ Stunts</div>
         <div class="btn-grid">
-          <button class="btn" onclick="doDonut()">🍩 Donut</button>
-          <button class="btn" onclick="doZigZag()">⚡ Zig-Zag</button>
-          <button class="btn" onclick="doJTurn()">🌪️ J-Turn</button>
-          <button class="btn" onclick="doBurnout()">🔥 Burnout</button>
-          <button class="btn" onclick="doRocketStart()">🚀 Launch</button>
-          <button class="btn" onclick="doFigure8()">8️⃣ Figure 8</button>
+          <button class="btn" onclick="doDonut()">ðŸ© Donut</button>
+          <button class="btn" onclick="doZigZag()">âš¡ Zig-Zag</button>
+          <button class="btn" onclick="doJTurn()">ðŸŒªï¸ J-Turn</button>
+          <button class="btn" onclick="doBurnout()">ðŸ”¥ Burnout</button>
+          <button class="btn" onclick="doRocketStart()">ðŸš€ Launch</button>
+          <button class="btn" onclick="doFigure8()">8ï¸âƒ£ Figure 8</button>
         </div>
-        <button class="btn btn-red" style="margin-top:4px;" onclick="stopAll()">🛑 Stop Driving</button>
+        <button class="btn btn-red" style="margin-top:4px;" onclick="stopAll()">ðŸ›‘ Stop Driving</button>
       </div>
       
       <div class="panel">
-        <div class="section-title">🎭 Combo Effects</div>
+        <div class="section-title">ðŸŽ­ Combo Effects</div>
         <div class="btn-grid">
-          <button class="btn btn-purple" onclick="doPoliceChase()">🚓 Police Chase</button>
-          <button class="btn btn-amber" onclick="doGhostMode()">👻 Ghost Mode</button>
-          <button class="btn btn-green" onclick="doRaceMode()">🏁 Race Mode</button>
-          <button class="btn btn-teal"  onclick="doPartyMode()">🎉 Party Mode</button>
-          <button class="btn btn-red"   onclick="doSOSMode()">🆘 SOS Rescue</button>
+          <button class="btn btn-purple" onclick="doPoliceChase()">ðŸš“ Police Chase</button>
+          <button class="btn btn-amber" onclick="doGhostMode()">ðŸ‘» Ghost Mode</button>
+          <button class="btn btn-green" onclick="doRaceMode()">ðŸ Race Mode</button>
+          <button class="btn btn-teal"  onclick="doPartyMode()">ðŸŽ‰ Party Mode</button>
+          <button class="btn btn-red"   onclick="doSOSMode()">ðŸ†˜ SOS Rescue</button>
         </div>
-        <button class="btn btn-red" style="margin-top:4px;" onclick="stopCombo()">❌ Stop Combo</button>
+        <button class="btn btn-red" style="margin-top:4px;" onclick="stopCombo()">âŒ Stop Combo</button>
       </div>
     </div>
 
@@ -283,37 +283,37 @@
       <!-- Keyboard HUD -->
       <div class="kb-hud">
         <div class="kb-row">
-          <div class="kb-key" id="kU">↑ W</div>
+          <div class="kb-key" id="kU">â†‘ W</div>
         </div>
         <div class="kb-row">
-          <div class="kb-key" id="kA">← A</div>
-          <div class="kb-key" id="kS">↓ S</div>
-          <div class="kb-key" id="kR">→ D</div>
+          <div class="kb-key" id="kA">â† A</div>
+          <div class="kb-key" id="kS">â†“ S</div>
+          <div class="kb-key" id="kR">â†’ D</div>
         </div>
         <div class="kb-row" style="margin-top:4px;">
-          <div class="kb-key" id="kSP" style="min-width:130px;">SPACE — Lights</div>
+          <div class="kb-key" id="kSP" style="min-width:130px;">SPACE â€” Lights</div>
         </div>
-        <div class="kb-hint">🎮 L = Police · B = Strobe · N = Lights Off</div>
-        <button id="mouse-lock-btn" class="btn btn-teal" style="margin-top:10px; width:100%;" onclick="toggleMouseLock()">🖱️ Enable Mouse Control</button>
+        <div class="kb-hint">ðŸŽ® L = Police Â· B = Strobe Â· N = Lights Off</div>
+        <button id="mouse-lock-btn" class="btn btn-teal" style="margin-top:10px; width:100%;" onclick="toggleMouseLock()">ðŸ–±ï¸ Enable Mouse Control</button>
       </div>
     </div>
 
     <!-- RIGHT COLUMN -->
     <div class="right-col panel-container">
       <div class="panel">
-        <div class="section-title">💡 Lights</div>
+        <div class="section-title">ðŸ’¡ Lights</div>
         <div class="btn-grid">
-          <button class="btn" onclick="setLight('on')">💡 On</button>
-          <button class="btn" onclick="setLight('blink')">⚠️ Blink</button>
-          <button class="btn" onclick="setLight('fastblink')">🔆 Fast Blink</button>
-          <button class="btn" onclick="setLight('strobe')">⚡ Strobe</button>
-          <button class="btn" onclick="setLight('police')">🚓 Police</button>
-          <button class="btn" onclick="setLight('sos')">🆘 SOS</button>
-          <button class="btn" onclick="setLight('heartbeat')">❤️ Heartbeat</button>
-          <button class="btn" onclick="setLight('candle')">🕯️ Candle</button>
-          <button class="btn" onclick="setLight('racestart')">🏁 Race Start</button>
+          <button class="btn" onclick="setLight('on')">ðŸ’¡ On</button>
+          <button class="btn" onclick="setLight('blink')">âš ï¸ Blink</button>
+          <button class="btn" onclick="setLight('fastblink')">ðŸ”† Fast Blink</button>
+          <button class="btn" onclick="setLight('strobe')">âš¡ Strobe</button>
+          <button class="btn" onclick="setLight('police')">ðŸš“ Police</button>
+          <button class="btn" onclick="setLight('sos')">ðŸ†˜ SOS</button>
+          <button class="btn" onclick="setLight('heartbeat')">â¤ï¸ Heartbeat</button>
+          <button class="btn" onclick="setLight('candle')">ðŸ•¯ï¸ Candle</button>
+          <button class="btn" onclick="setLight('racestart')">ðŸ Race Start</button>
         </div>
-        <button class="btn" style="margin-top:4px;" onclick="setLight('off')">🌑 Lights Off</button>
+        <button class="btn" style="margin-top:4px;" onclick="setLight('off')">ðŸŒ‘ Lights Off</button>
       </div>
     </div>
   </div>
@@ -324,13 +324,13 @@
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', newTheme);
-      document.getElementById('theme-btn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      document.getElementById('theme-btn').textContent = newTheme === 'dark' ? 'â˜€ï¸' : 'ðŸŒ™';
       localStorage.setItem('theme', newTheme);
     }
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       document.documentElement.setAttribute('data-theme', savedTheme);
-      document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+      document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? 'â˜€ï¸' : 'ðŸŒ™';
     }
 
     // Dynamically connect to the same host serving this page
@@ -422,7 +422,7 @@
 
     function toggleMouseLock() {
       if (!mouseLocked) {
-        if (!confirm('Enable Mouse Control?\n\nYour cursor will be hidden and locked. Move your mouse to steer — the joystick stays where you leave it.\n\nPress ESC to exit mouse control.')) return;
+        if (!confirm('Enable Mouse Control?\n\nYour cursor will be hidden and locked. Move your mouse to steer â€” the joystick stays where you leave it.\n\nPress ESC to exit mouse control.')) return;
         zone.requestPointerLock();
       } else {
         document.exitPointerLock();
@@ -433,7 +433,7 @@
       mouseLocked = document.pointerLockElement === zone;
       if (mouseLocked) {
         mlX = 0; mlY = 0;
-        mlBtn.textContent = '🖱️ Exit Mouse Control';
+        mlBtn.textContent = 'ðŸ–±ï¸ Exit Mouse Control';
         mlBtn.classList.add('active-mode');
         mlBtn.classList.remove('btn-teal');
       } else {
@@ -442,7 +442,7 @@
         stick.style.transition = 'transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275)';
         stick.style.transform = 'translate(0px,0px)';
         sendDrive(0, 0);
-        mlBtn.textContent = '🖱️ Enable Mouse Control';
+        mlBtn.textContent = 'ðŸ–±ï¸ Enable Mouse Control';
         mlBtn.classList.remove('active-mode');
         mlBtn.classList.add('btn-teal');
       }
@@ -537,12 +537,12 @@
 
     // ============ STUNTS ============
     async function doDonut() {
-      comboRunning = false; modeLabel.textContent = 'Mode: Donut 🍩';
+      comboRunning = false; modeLabel.textContent = 'Mode: Donut ðŸ©';
       sendDrive(1, 1); await sleep(3000); sendDrive(0, 0);
       modeLabel.textContent = 'Mode: Normal';
     }
     async function doZigZag() {
-      comboRunning = false; modeLabel.textContent = 'Mode: Zig-Zag ⚡';
+      comboRunning = false; modeLabel.textContent = 'Mode: Zig-Zag âš¡';
       for (let i = 0; i < 4; i++) {
         sendDrive(1, 1);  await sleep(350);
         sendDrive(1, -1); await sleep(350);
@@ -550,27 +550,27 @@
       sendDrive(0, 0); modeLabel.textContent = 'Mode: Normal';
     }
     async function doJTurn() {
-      comboRunning = false; modeLabel.textContent = 'Mode: J-Turn 🌪️';
+      comboRunning = false; modeLabel.textContent = 'Mode: J-Turn ðŸŒªï¸';
       sendDrive(-1, 0); await sleep(700);
       sendDrive(-1, 1); await sleep(450);
       sendDrive(1, -1); await sleep(700);
       sendDrive(0, 0);  modeLabel.textContent = 'Mode: Normal';
     }
     async function doBurnout() {
-      comboRunning = false; modeLabel.textContent = 'Mode: Burnout 🔥';
+      comboRunning = false; modeLabel.textContent = 'Mode: Burnout ðŸ”¥';
       setLight('strobe');
       sendDrive(1, 0); await sleep(2500);
       sendDrive(0, 0); setLight('off'); modeLabel.textContent = 'Mode: Normal';
     }
     async function doRocketStart() {
-      comboRunning = false; modeLabel.textContent = 'Mode: Launch 🚀';
+      comboRunning = false; modeLabel.textContent = 'Mode: Launch ðŸš€';
       setLight('racestart');
       await sleep(2000);
       sendDrive(1, 0); await sleep(2000);
       sendDrive(0, 0); setLight('off'); modeLabel.textContent = 'Mode: Normal';
     }
     async function doFigure8() {
-      comboRunning = false; modeLabel.textContent = 'Mode: Figure 8 8️⃣';
+      comboRunning = false; modeLabel.textContent = 'Mode: Figure 8 8ï¸âƒ£';
       for (let i = 0; i < 2; i++) {
         sendDrive(1, 1);  await sleep(1200);
         sendDrive(1, -1); await sleep(1200);
@@ -580,7 +580,7 @@
 
     // ============ COMBO EFFECTS ============
     async function doPoliceChase() {
-      comboRunning = true; modeLabel.textContent = 'Mode: Police Chase 🚓';
+      comboRunning = true; modeLabel.textContent = 'Mode: Police Chase ðŸš“';
       setLight('police');
       while (comboRunning) {
         sendDrive(1, 0);  await sleep(600);
@@ -591,7 +591,7 @@
       sendDrive(0, 0); setLight('off');
     }
     async function doGhostMode() {
-      comboRunning = true; modeLabel.textContent = 'Mode: Ghost Mode 👻';
+      comboRunning = true; modeLabel.textContent = 'Mode: Ghost Mode ðŸ‘»';
       setLight('candle');
       while (comboRunning) {
         sendDrive(1, 0);   await sleep(800 + Math.random()*600);
@@ -602,7 +602,7 @@
       sendDrive(0, 0); setLight('off');
     }
     async function doRaceMode() {
-      comboRunning = true; modeLabel.textContent = 'Mode: Race Mode 🏁';
+      comboRunning = true; modeLabel.textContent = 'Mode: Race Mode ðŸ';
       setLight('strobe');
       while (comboRunning) {
         sendDrive(1, 0);  await sleep(1000);
@@ -613,7 +613,7 @@
       sendDrive(0, 0); setLight('off');
     }
     async function doPartyMode() {
-      comboRunning = true; modeLabel.textContent = 'Mode: Party Mode 🎉';
+      comboRunning = true; modeLabel.textContent = 'Mode: Party Mode ðŸŽ‰';
       const lights = ['strobe','police','heartbeat','blink','fastblink'];
       let li = 0;
       while (comboRunning) {
@@ -626,7 +626,7 @@
       sendDrive(0, 0); setLight('off');
     }
     async function doSOSMode() {
-      comboRunning = true; modeLabel.textContent = 'Mode: SOS Rescue 🆘';
+      comboRunning = true; modeLabel.textContent = 'Mode: SOS Rescue ðŸ†˜';
       setLight('sos');
       while (comboRunning) {
         sendDrive(1, 0);  await sleep(500);
@@ -641,3 +641,4 @@
   </script>
 </body>
 </html>
+
